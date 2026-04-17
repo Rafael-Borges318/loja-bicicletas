@@ -1,6 +1,6 @@
 import app from "./app.js";
 import { env } from "./config/env.js";
 
-app.listen(env.port, () => {
-  console.log(`Servidor rodando em http://localhost:${env.port}`);
+app.listen(env.PORT, () => {
+  console.log(`🚀 Server rodando na porta ${env.PORT} em modo ${env.NODE_ENV}`);
 });
