@@ -15,7 +15,7 @@ export const listProducts = async (req: Request, res: Response, next: NextFuncti
 
 export const getProductById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const product = await ProductService.getProductById(req.params.id);
+    const product = await ProductService.getProductById(req.params.id as string);
     sendSuccess(res, 200, "Produto recuperado", product);
   } catch (error) {
     next(error);
@@ -24,7 +24,7 @@ export const getProductById = async (req: Request, res: Response, next: NextFunc
 
 export const getProductBySlug = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const product = await ProductService.getProductBySlug(req.params.slug);
+    const product = await ProductService.getProductBySlug(req.params.slug as string);
     sendSuccess(res, 200, "Produto recuperado", product);
   } catch (error) {
     next(error);
@@ -45,7 +45,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
 export const updateProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = updateProductSchema.parse(req.body);
-    const product = await ProductService.updateProduct(req.params.id, data);
+    const product = await ProductService.updateProduct(req.params.id as string, data);
     sendSuccess(res, 200, "Produto atualizado", product);
   } catch (error) {
     next(error);
@@ -54,7 +54,7 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
 
 export const deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await ProductService.deleteProduct(req.params.id);
+    await ProductService.deleteProduct(req.params.id as string);
     sendSuccess(res, 200, "Produto excluído");
   } catch (error) {
     next(error);

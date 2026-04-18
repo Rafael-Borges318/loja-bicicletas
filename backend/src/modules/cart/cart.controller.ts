@@ -29,7 +29,7 @@ export const updateItem = async (req: Request, res: Response, next: NextFunction
   try {
     if (!req.user) throw new UnauthorizedError();
     const data = updateCartItemSchema.parse(req.body);
-    const item = await CartService.updateItem(req.user.userId, req.params.itemId, data);
+    const item = await CartService.updateItem(req.user.userId, req.params.itemId as string, data);
     sendSuccess(res, 200, "Quantidade atualizada", item);
   } catch (error) {
     next(error);
@@ -39,7 +39,7 @@ export const updateItem = async (req: Request, res: Response, next: NextFunction
 export const removeItem = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.user) throw new UnauthorizedError();
-    await CartService.removeItem(req.user.userId, req.params.itemId);
+    await CartService.removeItem(req.user.userId, req.params.itemId as string);
     sendSuccess(res, 200, "Item removido do carrinho");
   } catch (error) {
     next(error);

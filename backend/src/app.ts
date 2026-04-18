@@ -12,8 +12,11 @@ import adminRoutes from "./modules/admin/admin.routes.js";
 
 const app = express();
 
+app.disable('x-powered-by'); // Mitigar footprinting básico
+
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10kb' })); // Prevenção contra DoS (Payload muito grande)
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true, message: "API rodando e saudável" });

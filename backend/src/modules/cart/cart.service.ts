@@ -31,9 +31,9 @@ export class CartService {
         id, cart_id, product_id, quantity,
         product:products (id, name, price, images, slug)
       `)
-      .eq("cart_id", cart.id);
+      .eq("cart_id", cart!.id);
 
-    return { ...cart, items: items || [] };
+    return { ...cart!, items: (items as any) || [] };
   }
 
   static async addItem(userId: string, data: AddToCartInput): Promise<CartItem> {

@@ -38,7 +38,7 @@ export const listAllTickets = async (req: Request, res: Response, next: NextFunc
 export const updateTicketStatus = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = updateTicketStatusSchema.parse(req.body);
-    const ticket = await SupportService.updateTicketStatus(req.params.id, data);
+    const ticket = await SupportService.updateTicketStatus(req.params.id as string, data);
     sendSuccess(res, 200, "Status atualizado", ticket);
   } catch (error) {
     next(error);

@@ -28,7 +28,7 @@ export const getUserOrders = async (req: Request, res: Response, next: NextFunct
 export const getOrderById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.user) throw new UnauthorizedError();
-    const order = await OrderService.getOrderById(req.user.userId, req.params.id, req.user.role);
+    const order = await OrderService.getOrderById(req.user.userId, req.params.id as string, req.user.role);
     sendSuccess(res, 200, "Detalhes do pedido", order);
   } catch (error) {
     next(error);
@@ -48,7 +48,7 @@ export const listAllOrders = async (req: Request, res: Response, next: NextFunct
 export const updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = updateOrderStatusSchema.parse(req.body);
-    const order = await OrderService.updateOrderStatus(req.params.id, data);
+    const order = await OrderService.updateOrderStatus(req.params.id as string, data);
     sendSuccess(res, 200, "Status atualizado", order);
   } catch (error) {
     next(error);
